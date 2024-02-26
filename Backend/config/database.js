@@ -8,10 +8,6 @@ const connectDatabase = () => {
     })
     .then((data) => {
       console.log(`Dabatase Connected With Server ${data.connection.host}`);
-    })
-    .catch((err) => {
-      console.log("DATABASE CONNECTIVITY ERROR");
-      console.log(err);
     });
 };
 
