@@ -6,6 +6,8 @@ const ErrorHandler = require("../Utils/ErrorHandler");
 //Create a product --ADMIN
 
 exports.createProduct = CatchAsyncError(async (req, resp) => {
+
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
 
   resp.status(201).json({
@@ -17,12 +19,13 @@ exports.createProduct = CatchAsyncError(async (req, resp) => {
 //Get all products
 exports.getAllProducts = CatchAsyncError(async (req, resp) => {
   const ResultPerPage = 5;
-  const totalProductCount = Product.countDocuments();
+  const totalProductCount = await Product.countDocuments();
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .pagination(ResultPerPage);
   const products = await apiFeature.query;
+  console.log(products);
   resp.status(200).json({
     success: true,
     products,
