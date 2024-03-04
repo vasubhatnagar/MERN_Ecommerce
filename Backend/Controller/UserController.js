@@ -96,18 +96,26 @@ exports.forgotPassword = CatchAsyncError(async (req, res, next) => {
 
 exports.resetPassword = CatchAsyncError(async (req, resp, next) => {
   const token = req.params.token;
-  const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
 
   const user = await User.findOne({
     resetPasswordToken,
-    resetPasswordExpire:{$gt:Date.now()}
+    resetPasswordExpire: { $gt: Date.now() },
   });
 
-  if(!user){
-    return next(new ErrorHandler(400, "Reset password link is invalid or has been expired."));
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        400,
+        "Reset password link is invalid or has been expired."
+      )
+    );
   }
 
-  if(req.body.password != req.body.confirmPassword){
+  if (req.body.password != req.body.confirmPassword) {
     return next(new ErrorHandler(400, "Passwords do not match"));
   }
 
@@ -119,32 +127,38 @@ exports.resetPassword = CatchAsyncError(async (req, resp, next) => {
   sendToken(user, 200, resp);
 });
 
-exports.getUserDetails = CatchAsyncError(async (req, resp, next) =>{
+exports.getUserDetails = CatchAsyncError(async (req, resp, next) => {
   const user = await User.findById(req.user.id);
 
   resp.status(200).json({
     user,
-    success:true
-  })
+    success: true,
+  });
 });
 
-exports.updatePassword = CatchAsyncError(async(req, resp, next) => {
-
+exports.updatePassword = CatchAsyncError(async (req, resp, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
   const isPwdMatched = await user.comparePasswords(req.body.oldPassword);
-  console.log("SSSSTTTAATTT"+isPwdMatched)
+  console.log("SSSSTTTAATTT" + isPwdMatched);
 
-  if(!isPwdMatched){
-    return next(new ErrorHandler(400, "Old Password does not match with the profile."));
+  if (!isPwdMatched) {
+    return next(
+      new ErrorHandler(400, "Old Password does not match with the profile.")
+    );
   }
 
-  if(req.body.newPassword !== req.body.confirmPassword){
-    return next(new ErrorHandler(400, "New Password does not match with Confirm Password."))
+  if (req.body.newPassword !== req.body.confirmPassword) {
+    return next(
+      new ErrorHandler(
+        400,
+        "New Password does not match with Confirm Password."
+      )
+    );
   }
 
-  if(req.body.newPassword === req.body.oldPassword){
-    return next(new ErrorHandler(400, "You can not update the same password."))
+  if (req.body.newPassword === req.body.oldPassword) {
+    return next(new ErrorHandler(400, "You can not update the same password."));
   }
 
   //if all validations are done then update the password.
@@ -153,20 +167,98 @@ exports.updatePassword = CatchAsyncError(async(req, resp, next) => {
   await user.save();
 
   sendToken(user, 200, resp);
-
 });
 
-exports.updateProfile = CatchAsyncError(async(req, resp, next) =>{
-  const {email, name} = req.body;
-  const user = await User.findByIdAndUpdate(req.user.id, {email, name}, {
+exports.updateProfile = CatchAsyncError(async (req, resp, next) => {
+  const { email, name } = req.body;
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { email, name },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  resp.status(201).json({
+    success: true,
+    message: "Profile updates successfully!!",
+    user,
+  });
+});
+
+//Admin Route
+exports.getAllUsers = CatchAsyncError(async (req, resp, next) => {
+  const users = await User.find();
+
+  if (!users) {
+    return next(new ErrorHandler(404, "No user found !"));
+  }
+
+  resp.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+exports.getUserDetails = CatchAsyncError(async (req, resp, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        404,
+        `No User Found with mentioned IT : ${req.parama.id}`
+      )
+    );
+  }
+
+  resp.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+//Update user role -- Admin
+
+exports.updateUserRole = CatchAsyncError(async (req, resp, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
     new:true,
     runValidators:true,
     useFindAndModify:false
   });
 
-  resp.status(201).json({
+  resp.status(200).json({
     success:true,
-    message:"Profile updates successfully!!",
     user
-  })
-})
+  });
+});
+
+
+//Delete User -- Admin
+
+exports.deleteUser = CatchAsyncError(async (req, resp, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        404,
+        `No User Found with mentioned IT : ${req.parama.id}`
+      )
+    );
+  }
+
+  await user.remove();
+
+  resp.status(200).json({
+    success:true,
+  });
+});

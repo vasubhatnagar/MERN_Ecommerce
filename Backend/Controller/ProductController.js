@@ -6,7 +6,6 @@ const ErrorHandler = require("../Utils/ErrorHandler");
 //Create a product --ADMIN
 
 exports.createProduct = CatchAsyncError(async (req, resp) => {
-
   req.body.user = req.user.id;
   const product = await Product.create(req.body);
 
@@ -29,7 +28,7 @@ exports.getAllProducts = CatchAsyncError(async (req, resp) => {
   resp.status(200).json({
     success: true,
     products,
-    totalProductCount
+    totalProductCount,
   });
 });
 
@@ -80,6 +79,47 @@ exports.getProductDetails = CatchAsyncError(async (req, resp, next) => {
   if (!product) {
     return next(new ErrorHandler(404, "Product Not Found"));
   }
+
+  resp.status(200).json({
+    success: true,
+    product,
+  });
+});
+
+exports.createReview = CatchAsyncError(async (req, resp, next) => {
+  const productReview = {
+    name: req.user.name,
+    user: req.user.id,
+    rating: Number(req.body.rating),
+    comment: req.body.comment,
+  };
+
+  const product = await Product.findById(req.body.productId);
+  if (!product) {
+    return next(new ErrorHandler(404, "No product Found with mentioned ID"));
+  }
+  const isAlreadyReviewed = product.reviews.find(
+    (rev) => rev.user.toString() === req.user.id.toString()
+  );
+  if (isAlreadyReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.user.toString() === req.user.id.toString()) {
+        rev.rating = Number(productReview.rating);
+        rev.comment = productReview.comment;
+      }
+    });
+  } else {
+    product.reviews.push(productReview);
+    product.numOfReviews = product.reviews.length;
+  }
+  let avg = 0;
+
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+  product.ratings = avg / product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
 
   resp.status(200).json({
     success: true,

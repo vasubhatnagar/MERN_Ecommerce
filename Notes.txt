@@ -1,0 +1,8 @@
+start time : 3:35
+-----------------
+
+1) create  admin routes. first for get all users and second for getting details of a particular user via req.params.id.
+2)adding a reqiew to product : 
+    a) create a product rating object with values of rating, user, name, comment
+    b) find if already provided review by comparing ID
+    c) o 
