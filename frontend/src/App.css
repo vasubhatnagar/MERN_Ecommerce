@@ -1,3 +1,48 @@
 body{
 margin: 0px;
 }
+
+@keyframes mongo-animate {
+    from {color: lightgreen;}
+    to {color: green;}
+}
+@keyframes express-animate {
+    from {color: yellow;}
+    to {color: orange;}
+}
+@keyframes react-animate {
+    from {color: pink;}
+    to {color: red}
+}
+@keyframes node-animate {
+    from {color: white;}
+    to {color: cyan;}
+}
+
+.mongo{
+    color: green;
+    animation-name: mongo-animate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.express{
+    color: orange;
+    animation-name: express-animate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.react{
+    color: red;
+    animation-name: react-animate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.node{
+    color: cyan;
+    animation-name: node-animate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}

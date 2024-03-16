@@ -1,0 +1,6 @@
+.banner{
+    background-color: rgb(201, 233, 225);
+}
+#container{
+    scroll-behavior: smooth;
+}
