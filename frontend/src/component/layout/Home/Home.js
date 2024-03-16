@@ -1,19 +1,31 @@
 import { Fragment } from "react";
 import "./Home.css";
 import Product from "./Product.js";
+import MetaData from "../Metadata.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProduct } from "../../../actions/productActions.js";
 const Home = () => {
-  const product = {
-    name: "Nike T-Shirt",
-    price: 3000,
-    _id: 6846543543,
-    images: [
-      {
-        url: "https://assets.ajio.com/medias/sys_master/root/20230619/5aKq/64906776d55b7d0c6375525f/-473Wx593H-469494762-blackgrey-MODEL.jpg",
-      },
-    ],
-  };
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getProduct())
+  },[dispatch])
+
+  const {loading, error, products} = useSelector(state => state.products);
+  // const product = {
+  //   name: "Nike T-Shirt",
+  //   price: 3000,
+  //   _id: 6846543543,
+  //   images: [
+  //     {
+  //       url: "https://assets.ajio.com/medias/sys_master/root/20230619/5aKq/64906776d55b7d0c6375525f/-473Wx593H-469494762-blackgrey-MODEL.jpg",
+  //     },
+  //   ],
+  // };
   return (
     <Fragment>
+      <MetaData title={"Home Page"}/>
       <div className="banner py-10">
         <div className="flex-col text-center align-middle justify-center text-cyan-700 mt-28">
           <p className="text-4xl font-semibold">Welcome to E-Commerce</p>
@@ -32,14 +44,9 @@ const Home = () => {
           className="flex flex-wrap justify-center py-5 mx-12"
           id="container"
         >
+        {products && products.map((product)=>(
           <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
-          <Product product={product} />
+        ))}
         </div>
       </div>
     </Fragment>
