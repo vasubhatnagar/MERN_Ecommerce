@@ -6,6 +6,6 @@ module.exports = (err, req, resp, next)=>{
     resp.status(err.statusCode).json({
         success:false,
         error: err,
-        message:err.stack
+        message:err.message
     });
 }
