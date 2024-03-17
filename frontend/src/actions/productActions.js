@@ -10,12 +10,13 @@ import {
   PRODUCT_DETAILS_SUCCESS,
 } from "../constants/productConstants";
 
-export const getProduct = ()=>async (dispatch) => {
+export const getProduct = () => async (dispatch) => {
   try {
     dispatch({
       type: ALL_PRODUCT_REQUEST,
     });
-
+    
+    axios.defaults.baseURL = 'http://localhost:3000/'
     const { data } = await axios.get("api/v1/products");
 
     dispatch({
@@ -31,19 +32,20 @@ export const getProduct = ()=>async (dispatch) => {
   }
 };
 
-export const getProductDetails = (id)=>async (dispatch) => {
+export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,
     });
-
+    console.log(axios);
+    axios.defaults.baseURL = 'http://localhost:3000/'
     const { data } = await axios.get(`api/v1/product/${id}`);
-
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data.product,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload: error.response.data.message,
