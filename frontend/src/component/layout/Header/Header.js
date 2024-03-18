@@ -15,7 +15,6 @@ import {
   TbCircleLetterR,
   TbCircleLetterN,
 } from "react-icons/tb";
-
 const Header = () => {
   useEffect(() => {
     WebFont.load({
@@ -26,51 +25,59 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="flex justify-between bg-black py-3 px-5 font-mono">
-      <div className="flex items-center">
-        <h1 className="text-red-100">
-          <TbCircleLetterM size={40} />
-        </h1>
-        <h3 className="text-red-200">
-          <TbCircleLetterE size={40} />
-        </h3>
-        <h3 className="text-red-300">
-          <TbCircleLetterR size={40} />
-        </h3>
-        <h3 className="text-red-400">
-          <TbCircleLetterN size={40} />
-        </h3>
+    <div className=" sm:flex text-center justify-between bg-black py-3 px-5 font-mono">
+      <div className="justify-center text-white font-bold p-0 flex items-center ">
+        <div className="px-3 mongo">
+          <div>
+            <TbCircleLetterM size={30} />
+          </div>
+        </div>
+        <div className="px-3 express">
+          <div>
+            <TbCircleLetterE size={30} />
+          </div>
+        </div>
+        <div className="px-3 react">
+          <div>
+            <TbCircleLetterR size={30} />
+          </div>
+        </div>
+        <div className="px-3 node">
+          <div>
+            <TbCircleLetterN size={30} />
+          </div>
+        </div>
       </div>
-      <div className="flex justify-between align-middle">
-        <div className="flex-col items-center px-5">
-          <h3 className="text-red-100 twc">
+      <div className="flex justify-between items-center">
+        <div className="flex-col items-center px-0 sm:px-5">
+          <h3 className="text-white twc">
             <MdHome />
           </h3>
-          <h4 className="text-red-100 font-extrabold">Home</h4>
+          <h4 className="text-white font-extrabold">Home</h4>
         </div>
-        <div className="flex-col  items-center px-5">
-          <h3 className="text-red-300 twc">
+        <div className="flex-col  items-center px-0 sm:px-5">
+          <h3 className="text-white twc">
             <MdOutlineContactMail />
           </h3>
-          <h4 className="text-red-300 font-extrabold">About Us</h4>
+          <h4 className="text-white font-extrabold">About Us</h4>
         </div>
-        <div className="flex-col  items-center px-5">
-          <h3 className="text-red-400 twc">
+        <div className="flex-col  items-center px-0 sm:px-5">
+          <h3 className="text-white twc">
             <MdShoppingCart />
           </h3>
-          <h4 className="text-red-400 font-extrabold">Cart</h4>
+          <h4 className="text-white font-extrabold">Cart</h4>
         </div>
-        <div className="flex-col  items-center px-5">
-          <h3 className="text-red-300 twc">
+        <div className="flex-col  items-center px-0 sm:px-5">
+          <h3 className="text-white twc">
             <MdOutlineEmail />
           </h3>
-          <h4 className="text-red-300 font-extrabold">Messages</h4>
+          <h4 className="text-white font-extrabold">Messages</h4>
         </div>
-        <div className="flex-col  items-center px-5">
-          <h3 className="text-red-100 twc">
+        <div className="flex-col  items-center px-0 sm:px-5">
+          <h3 className="text-white twc">
             <MdPhoneCallback />
           </h3>
-          <h4 className="text-red-100 font-extrabold">Request Callback</h4>
+          <h4 className="text-white font-extrabold">Request Callback</h4>
         </div>
       </div>
       <div className="flex-col items-center p-1 rounded-2xl bg-red-800">

@@ -14,9 +14,9 @@ import { SiGmail } from "react-icons/si";
 const Footer = () => {
   return (
     <div>
-      <div className="md:flex justify-evenly bg-black p-7 font-mono">
-        <div className="w-1/4 justify-center px-3 text-center">
-          <div className="text-white font-bold p-4 flex ">
+      <div className="sm:flex justify-evenly bg-black p-7 font-mono">
+        <div className="sm:w-1/4 justify-center px-3 text-center">
+          <div className="text-white font-bold p-4 flex justify-between">
             <div className="px-3 mongo">
               <div>
                 <TbCircleLetterM size={30} />
@@ -54,7 +54,7 @@ const Footer = () => {
           <p className="text-white"> Copyrights Reserved</p>
         </div>
         <div className="border-e-2"></div>
-        <div className="text-white p-4 text-center w-1/4">
+        <div className="text-white p-4 text-center sm:w-1/4">
           <h2 className="border-2 mb-3 font-extrabold">Shipping</h2>
           <p>
             There are 2 types of shipping. Expedite and standard. For Expetide
@@ -62,7 +62,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="border-e-2 "></div>
-        <div className="text-white p-4 text-center w-1/4">
+        <div className="text-white p-4 text-center sm:w-1/4">
           <h2 className="border-2 mb-3 font-extrabold">Payments</h2>
           <p>
             Only Card Payments are accepted on this website. If you wish to pay
@@ -70,7 +70,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="border-e-2 "></div>
-        <div className="text-white font-bold p-4 text-center w-1/4">
+        <div className="text-white font-bold p-4 text-center sm:w-1/4">
           <h2 className="border-2 mb-3 font-extrabold">Connect with us</h2>
           <div className="flex justify-evenly py-5">
             <div className="text-blue-900">

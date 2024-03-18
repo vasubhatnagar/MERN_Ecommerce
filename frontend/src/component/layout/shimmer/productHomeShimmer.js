@@ -1,4 +1,4 @@
-const Features_Product_Shimmer = () => {
+const productHomeShimmer = () => {
   return (
     <div>
       <div className="flex flex-wrap">
@@ -58,4 +58,4 @@ const Features_Product_Shimmer = () => {
   );
 };
 
-export default Features_Product_Shimmer;
+export default productHomeShimmer;

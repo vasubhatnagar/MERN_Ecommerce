@@ -5,7 +5,7 @@ import MetaData from "../Metadata.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProduct } from "../../../actions/productActions.js";
-import Features_Product_Shimmer from "../../../shimmer/Featured_Product_Shimmer.js";
+import productHomeShimmer from "../shimmer/productHomeShimmer.js";
 import { useAlert } from "react-alert";
 
 const Home = () => {
@@ -33,7 +33,7 @@ const Home = () => {
             </button>
           </a>
 
-          <h2 className=" font-serif font-bold text-center font-serif text-2xl border-b-4 border-cyan-800 w-[300px] mx-auto mt-52 text-cyan-700">
+          <h2 className=" font-serif font-bold text-center font-serif text-2xl border-b-4 border-cyan-800 w-[300px] min-w-[100px] mx-auto mt-52 text-cyan-700">
             Featured Products
           </h2>
         </div>
@@ -42,9 +42,9 @@ const Home = () => {
           id="container"
         >
           {loading ? (
-            <Features_Product_Shimmer />
+            <productHomeShimmer/>
           ) : (
-            products && products.map((product) => <Product product={product} />)
+            products && products.map((product) => <Product product={product}  key={product._id}/>)
           )}
         </div>
       </div>
