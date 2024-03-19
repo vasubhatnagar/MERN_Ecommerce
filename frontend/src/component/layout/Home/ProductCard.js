@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
-const Product = ({ product }) => {
+const ProductCard = ({ product, Catalogue }) => {
   const options = {
     edit: false,
     color: "black",
@@ -10,7 +10,7 @@ const Product = ({ product }) => {
   };
   return (
     <div className="bg-white productCard max-w-[200px] m-4 px-3 py-4 border-4 shadow-2xl border-cyan-950 rounded-md">
-      <Link className="flex-col " to={`product/${product._id}`}>
+      <Link className="flex-col " to={`/product/${product._id}`}>
       
         <img
           className="min-w-[170px]"
@@ -28,4 +28,4 @@ const Product = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductCard;

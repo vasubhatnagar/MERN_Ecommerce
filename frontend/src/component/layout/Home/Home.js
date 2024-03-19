@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import "./Home.css";
-import Product from "./Product.js";
 import MetaData from "../Metadata.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProduct } from "../../../actions/productActions.js";
-import productHomeShimmer from "../shimmer/productHomeShimmer.js";
 import { useAlert } from "react-alert";
+import ProductCard from "./ProductCard.js";
+import ProductHomeShimmer from "../shimmer/ProductHomeShimmer.js";
 
 const Home = () => {
   const { loading, error, products } = useSelector((state) => state.products);
@@ -42,9 +42,9 @@ const Home = () => {
           id="container"
         >
           {loading ? (
-            <productHomeShimmer/>
+            <ProductHomeShimmer/>
           ) : (
-            products && products.map((product) => <Product product={product}  key={product._id}/>)
+            products && products.map((product) => <ProductCard product={product}  key={product._id}/>)
           )}
         </div>
       </div>

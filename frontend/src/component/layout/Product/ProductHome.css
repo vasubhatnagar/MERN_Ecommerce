@@ -1,0 +1,6 @@
+.banner-image{
+    background-image: url("https://images-eu.ssl-images-amazon.com/images/G/31/Events/img24/Holi24/GW/Holi24_GW_PC_H1_2x._CB579546797_.jpg");
+  background-position: top; /* Center the image */
+  background-repeat: no-repeat; 
+  width: 100%;
+}

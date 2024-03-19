@@ -15,6 +15,9 @@ import {
   TbCircleLetterR,
   TbCircleLetterN,
 } from "react-icons/tb";
+import { GiClothes } from "react-icons/gi";
+import { Link } from "react-router-dom";
+
 const Header = () => {
   useEffect(() => {
     WebFont.load({
@@ -50,21 +53,27 @@ const Header = () => {
       </div>
       <div className="flex justify-between items-center">
         <div className="flex-col items-center px-0 sm:px-5">
-          <h3 className="text-white twc">
-            <MdHome />
-          </h3>
-          <h4 className="text-white font-extrabold">Home</h4>
+          <Link to={"/"}>
+            <h3 className="text-white twc">
+              <MdHome />
+            </h3>
+            <h4 className="text-white font-extrabold">Home</h4>
+          </Link>
         </div>
         <div className="flex-col  items-center px-0 sm:px-5">
-          <h3 className="text-white twc">
-            <MdOutlineContactMail />
-          </h3>
-          <h4 className="text-white font-extrabold">About Us</h4>
+          <Link to={"/products"}>
+            <h3 className="text-white twc">
+              <GiClothes />
+            </h3>
+            <h4 className="text-white font-extrabold">Products</h4>
+          </Link>
         </div>
         <div className="flex-col  items-center px-0 sm:px-5">
-          <h3 className="text-white twc">
-            <MdShoppingCart />
-          </h3>
+          <Link to={"/cart"}>
+            <h3 className="text-white twc">
+              <MdShoppingCart />
+            </h3>
+          </Link>
           <h4 className="text-white font-extrabold">Cart</h4>
         </div>
         <div className="flex-col  items-center px-0 sm:px-5">

@@ -20,7 +20,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
-      alert(error);
+      alert.error(error);
     }
     dispatch(clearErrors);
     dispatch(getProductDetails(id));
