@@ -1,0 +1,25 @@
+.lock-banner{
+        background-image: url("../../../../public/background.png");
+        background-repeat: no-repeat;  
+        background-position: 0% 0%;
+        background-size: 100% 100%;
+}
+
+.glass-card {
+    background: gray;
+    background: linear-gradient(
+        to right bottom,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+    backdrop-filter: blur(0.001rem);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px #FFFFFF;
+}
+
+.parentDiv{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+    transform: translate(-50%, -50%);
+}

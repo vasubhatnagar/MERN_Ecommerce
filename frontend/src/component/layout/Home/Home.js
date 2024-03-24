@@ -33,7 +33,7 @@ const Home = () => {
             </button>
           </a>
 
-          <h2 className=" font-serif font-bold text-center font-serif text-2xl border-b-4 border-cyan-800 w-[300px] min-w-[100px] mx-auto mt-52 text-cyan-700">
+          <h2 className="font-mono font-bold text-center text-2xl border-b-4 border-cyan-800 w-[300px] min-w-[100px] mx-auto mt-52 text-cyan-700">
             Featured Products
           </h2>
         </div>

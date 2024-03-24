@@ -50,7 +50,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <p className="text-white font-serif"> Vasu Bhatnagar</p>
+          <p className="text-white font-mono"> Vasu Bhatnagar</p>
           <p className="text-white"> Copyrights Reserved</p>
         </div>
         <div className="border-e-2"></div>

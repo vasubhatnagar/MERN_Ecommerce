@@ -12,7 +12,7 @@ const ProductDetailsShimmer = () => {
             alt="img"
           />
         </div>
-        <div className="p-8 font-sans sm:w-1/2">
+        <div className="p-8 font-mono sm:w-1/2">
           <p className="text-3xl font-bold py-2"></p>
           <p className="text-2xl font-semibold py-2">
             Product ID : 

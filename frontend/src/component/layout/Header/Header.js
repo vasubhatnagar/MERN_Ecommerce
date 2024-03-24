@@ -86,14 +86,16 @@ const Header = () => {
           <h3 className="text-white twc">
             <MdPhoneCallback />
           </h3>
-          <h4 className="text-white font-extrabold">Request Callback</h4>
+          <h4 className="text-white font-extrabold">Callback</h4>
         </div>
       </div>
       <div className="flex-col items-center p-1 rounded-2xl bg-red-800">
-        <h3 className="text-white px-3 twc">
-          <MdLogin />
-        </h3>
-        <h4 className="text-white px-3">Login</h4>
+        <Link to={"/login"}>
+          <h3 className="text-white px-3 twc">
+            <MdLogin />
+          </h3>
+          <h4 className="text-white px-3">Login</h4>
+        </Link>
       </div>
     </div>
   );
