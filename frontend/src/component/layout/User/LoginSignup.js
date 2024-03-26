@@ -2,30 +2,54 @@ import { useEffect, useRef, useState } from "react";
 import "./LoginSignup.css";
 import { MdContactMail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHashtag } from "react-icons/fa";
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearError, login , register} from "../../../actions/userActions";
+import { useAlert } from "react-alert";
 const LoginSignup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const alert = useAlert();
   const loginToggle = useRef();
   const signupToggle = useRef();
   const [activeTab, setActiveTab] = useState("login");
-  const[avatarPreview, setAvatarPreview] = useState("https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg");
-  const[avatar, setAvatar] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState(
+    "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+  );
+  const [avatar, setAvatar] = useState("");
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
   const [user, setUser] = useState({});
-  const LoginSubmitted = () => {};
-  const SignupSubmitted = (e) => {
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const {name, email, password} = user;
+
+  const LoginSubmitted = (e) => {
     e.preventDefault();
-    console.log(user);
+    dispatch(login(loginEmail, loginPassword));
   };
+
+  const SubmitRegister = (e)=>{
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.set("name",name);
+    myForm.set("email",email);
+    myForm.set("password",password);
+    myForm.set("avatar",avatar);
+    dispatch(register(myForm));
+  }
   const RegisterDataChange = (e) => {
+    e.preventDefault();
     if (e.target.name === "avatar") {
       const reader = new FileReader();
-      reader.onload = () =>{
-        if(reader.readyState == 2){
+      reader.onload = () => {
+        if (reader.readyState == 2) {
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
         }
-      }
+      };
       reader.readAsDataURL(e.target.files[0]);
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
@@ -48,7 +72,15 @@ const LoginSignup = () => {
   };
   useEffect(() => {
     loginToggleClicked();
-  }, []);
+
+    if (error) {
+      alert.error(error);
+      dispatch(clearError());
+    }
+    if (isAuthenticated) {
+      navigate("/account");
+    }
+  }, [dispatch, error, isAuthenticated, navigate]);
   return (
     <div>
       <div className="lock-banner min-h-[100vh] align-middle relative">
@@ -76,6 +108,10 @@ const LoginSignup = () => {
                   <MdContactMail size={32} className="w-[20%]" />
                   <input
                     type="email"
+                    onChange={(e) => {
+                      setLoginEmail(e.target.value);
+                    }}
+                    value={loginEmail}
                     required
                     className="w-[80%] font-mono text-white bg-transparent border-2 border-white rounded-md px-3"
                   />
@@ -86,6 +122,10 @@ const LoginSignup = () => {
                   <input
                     type="password"
                     required
+                    onChange={(e) => {
+                      setLoginPassword(e.target.value);
+                    }}
+                    value={loginPassword}
                     className="w-[80%] font-mono bg-transparent text-white border-2 border-white rounded-md px-3"
                   />
                 </div>
@@ -98,14 +138,14 @@ const LoginSignup = () => {
                   <input
                     type="submit"
                     value="Login"
-                    className="bg-black mt-4 px-2 py-1 w-[30%] rounded-xl font-bold"
+                    className="bg-black mt-4 px-2 py-1 w-[30%] rounded-xl font-bold cursor-pointer"
                   ></input>
                 </div>
               </form>
             )}
 
             {activeTab === "signup" && (
-              <form onSubmit={SignupSubmitted} encType="multipart/form-data">
+              <form onSubmit={SubmitRegister} encType="multipart/form-data">
                 <div className="px-3 name py-1 flex justify-center align-middle items-center">
                   <FaHashtag size={32} className="w-[20%]" />
                   <input
