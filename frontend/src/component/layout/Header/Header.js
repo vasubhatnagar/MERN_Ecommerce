@@ -17,8 +17,10 @@ import {
 } from "react-icons/tb";
 import { GiClothes } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
     WebFont.load({
       google: {
@@ -90,12 +92,21 @@ const Header = () => {
         </div>
       </div>
       <div className="flex-col items-center p-1 rounded-2xl bg-red-800">
-        <Link to={"/login"}>
-          <h3 className="text-white px-3 twc">
-            <MdLogin />
-          </h3>
-          <h4 className="text-white px-3">Login</h4>
-        </Link>
+        {(isAuthenticated && user) ? (
+          <Link to={"/"}>
+            <h3 className="text-white px-3 twc">
+              <MdLogin />
+            </h3>
+            <h4 className="text-white px-3">Logout</h4>
+          </Link>
+        ) : (
+          <Link to={"/login"}>
+            <h3 className="text-white px-3 twc">
+              <MdLogin />
+            </h3>
+            <h4 className="text-white px-3">Login</h4>
+          </Link>
+        )}
       </div>
     </div>
   );

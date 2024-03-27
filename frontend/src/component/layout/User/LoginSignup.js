@@ -181,7 +181,7 @@ const LoginSignup = () => {
                   />
                 </div>
 
-                <div className="px-3  mt-4 py-1 avatar flex justify-around align-middle items-center">
+                {/* <div className="px-3  mt-4 py-1 avatar flex justify-around align-middle items-center ">
                   <img
                     src={avatarPreview}
                     className="h-[50px] w-[50px] rounded-full"
@@ -193,7 +193,7 @@ const LoginSignup = () => {
                     onChange={RegisterDataChange}
                     className="w-[70%] font-mono bg-transparent text-white rounded-md pr-3"
                   />
-                </div>
+                </div> */}
                 <div>
                   <input
                     type="submit"

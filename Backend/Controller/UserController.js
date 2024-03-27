@@ -127,15 +127,6 @@ exports.resetPassword = CatchAsyncError(async (req, resp, next) => {
   sendToken(user, 200, resp);
 });
 
-exports.getUserDetails = CatchAsyncError(async (req, resp, next) => {
-  const user = await User.findById(req.user.id);
-
-  resp.status(200).json({
-    user,
-    success: true,
-  });
-});
-
 exports.updatePassword = CatchAsyncError(async (req, resp, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
@@ -203,7 +194,7 @@ exports.getAllUsers = CatchAsyncError(async (req, resp, next) => {
 });
 
 exports.getUserDetails = CatchAsyncError(async (req, resp, next) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.user.id);
 
   if (!user) {
     return next(

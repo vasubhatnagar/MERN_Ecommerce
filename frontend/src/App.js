@@ -6,7 +6,14 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import ProductDetails from "./component/layout/Product/ProductDetails.js";
 import Products from "./component/layout/Product/Products.js";
 import LoginSignup from "./component/layout/User/LoginSignup.js";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadUser } from "./actions/userActions.js";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
   return (
     <Router>
       <Header />
