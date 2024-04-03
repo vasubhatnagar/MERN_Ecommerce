@@ -3,11 +3,11 @@ import "./Header.css";
 import WebFont from "webfontloader";
 import {
   MdHome,
-  MdOutlineContactMail,
   MdShoppingCart,
   MdOutlineEmail,
   MdLogin,
   MdPhoneCallback,
+  MdAccountCircle,
 } from "react-icons/md";
 import {
   TbCircleLetterM,
@@ -17,10 +17,12 @@ import {
 } from "react-icons/tb";
 import { GiClothes } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../actions/userActions";
 
 const Header = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   useEffect(() => {
     WebFont.load({
       google: {
@@ -29,8 +31,14 @@ const Header = () => {
     });
   }, []);
 
+  const handleLogout = () => {
+    console.log("Hi");
+    dispatch(logout());
+  };
+
   return (
     <div className=" sm:flex text-center justify-between bg-black py-3 px-5 font-mono">
+      
       <div className="justify-center text-white font-bold p-0 flex items-center ">
         <div className="px-3 mongo">
           <div>
@@ -79,26 +87,19 @@ const Header = () => {
           <h4 className="text-white font-extrabold">Cart</h4>
         </div>
         <div className="flex-col  items-center px-0 sm:px-5">
-          <h3 className="text-white twc">
-            <MdOutlineEmail />
-          </h3>
-          <h4 className="text-white font-extrabold">Messages</h4>
-        </div>
-        <div className="flex-col  items-center px-0 sm:px-5">
-          <h3 className="text-white twc">
-            <MdPhoneCallback />
-          </h3>
-          <h4 className="text-white font-extrabold">Callback</h4>
+          <Link to={"/account"}>
+            <h3 className="text-white twc">
+              <MdAccountCircle />
+            </h3>
+            <h4 className="text-white font-extrabold">Profile</h4>
+          </Link>
         </div>
       </div>
-      <div className="flex-col items-center p-1 rounded-2xl bg-red-800">
-        {(isAuthenticated && user) ? (
-          <Link to={"/"}>
-            <h3 className="text-white px-3 twc">
-              <MdLogin />
-            </h3>
-            <h4 className="text-white px-3">Logout</h4>
-          </Link>
+      <div className="flex-col items-center p-1 rounded-2xl bg-red-800 min-w-[150px]">
+        {isAuthenticated && user ? (
+          <button className="text-white font-bold" onClick={handleLogout}>
+            Logout
+          </button>
         ) : (
           <Link to={"/login"}>
             <h3 className="text-white px-3 twc">
