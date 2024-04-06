@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EditProfilePopup from "./EditProfilePopup";
 import { openEditPopup } from "../../../actions/popupActions";
+import { loadUser } from "../../../actions/userActions";
 const Account = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const openEdit = () => {
-    dispath(openEditPopup());
+    dispatch(openEditPopup());
   };
   useEffect(() => {
     if (isAuthenticated === false) {

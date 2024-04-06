@@ -11,6 +11,10 @@ import {
   LOAD_USER_FAIL,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAIL,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL,
+  UPDATE_PROFILE_RESET,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -39,6 +43,22 @@ export const register = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const profileUpdate = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(`/api/v1/me/update`, userData, config);
+    console.log(data);
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+    dispatch({type: UPDATE_PROFILE_RESET});
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PROFILE_FAIL,
       payload: error.response.data.message,
     });
   }
