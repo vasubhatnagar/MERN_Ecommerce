@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./actions/userActions.js";
 import Account from "./component/layout/User/Account.js";
+import ResetPassword from "./component/layout/User/ResetPassword.js";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/products" Component={Products} />
         <Route exact path="/login" Component={LoginSignup} />
         <Route exact path="/account" Component={Account} />
+        <Route exact path="/password/reset/:resetToken" Component={ResetPassword} />
       </Routes>
       <Footer />
     </Router>

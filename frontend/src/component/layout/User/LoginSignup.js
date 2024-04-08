@@ -5,8 +5,13 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { FaHashtag } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { clearError, login , register} from "../../../actions/userActions";
+import { clearError, login, register } from "../../../actions/userActions";
 import { useAlert } from "react-alert";
+import ForgotPasswordPopup from "./ForgotPasswordPopup";
+import {
+  openEditPopup,
+  openForgotPwdPopup,
+} from "../../../actions/popupActions";
 const LoginSignup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,22 +29,22 @@ const LoginSignup = () => {
   const [user, setUser] = useState({});
   const [loginPassword, setLoginPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
-  const {name, email, password} = user;
+  const { name, email, password } = user;
 
   const LoginSubmitted = (e) => {
     e.preventDefault();
     dispatch(login(loginEmail, loginPassword));
   };
 
-  const SubmitRegister = (e)=>{
+  const SubmitRegister = (e) => {
     e.preventDefault();
     const myForm = new FormData();
-    myForm.set("name",name);
-    myForm.set("email",email);
-    myForm.set("password",password);
-    myForm.set("avatar",avatar);
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("password", password);
+    myForm.set("avatar", avatar);
     dispatch(register(myForm));
-  }
+  };
   const RegisterDataChange = (e) => {
     e.preventDefault();
     if (e.target.name === "avatar") {
@@ -70,6 +75,9 @@ const LoginSignup = () => {
     signupToggle.current.style.width = "80%";
     setActiveTab("signup");
   };
+  const forgotPasswordHandler = () => {
+    dispatch(openForgotPwdPopup());
+  };
   useEffect(() => {
     loginToggleClicked();
 
@@ -83,7 +91,8 @@ const LoginSignup = () => {
   }, [dispatch, error, isAuthenticated, navigate]);
   return (
     <div>
-      <div className="lock-banner min-h-[100vh] align-middle relative">
+      <ForgotPasswordPopup />
+      <div className="lock-banner min-h-[100vh] align-middle relative z-10">
         <div className="absolute parentDiv p-5 shadow-2xl text-white sm:w-[50%] rounded-lg backdrop-blur-md w-full glass-card">
           <div className="flex justify-center font-semibold font-mono py-5">
             <button
@@ -130,9 +139,12 @@ const LoginSignup = () => {
                   />
                 </div>
                 <div className="">
-                  <Link className="text-right text-white italic font-bold underline">
+                  <button
+                    onClick={forgotPasswordHandler}
+                    className="text-right text-white italic font-bold underline"
+                  >
                     Forgot Password?
-                  </Link>
+                  </button>
                 </div>
                 <div className="">
                   <input

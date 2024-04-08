@@ -2,8 +2,9 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EditProfilePopup from "./EditProfilePopup";
-import { openEditPopup } from "../../../actions/popupActions";
+import { openChangePwdPopup, openEditPopup } from "../../../actions/popupActions";
 import { loadUser } from "../../../actions/userActions";
+import ChangePasswordPopup from "./ChangePasswordPopup";
 const Account = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -11,6 +12,9 @@ const Account = () => {
   const openEdit = () => {
     dispatch(openEditPopup());
   };
+  const openChangePwd = ()=>{
+    dispatch(openChangePwdPopup())
+  }
   useEffect(() => {
     if (isAuthenticated === false) {
       navigate("/login");
@@ -22,6 +26,7 @@ const Account = () => {
         <Fragment>
           <div className="bg-white text-center">
             <EditProfilePopup />
+            <ChangePasswordPopup/>
             <div className="p-2 sm:p-12 text-blackfont-extrabold  bg-slate-300 rounded-md m-7 shadow-2xl">
               <div className="p-5">
                 <img
@@ -43,10 +48,10 @@ const Account = () => {
                 >
                   Edit Profile
                 </button>
-                <button className="bg-sky-950 m-1 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
+                <button  className="bg-sky-950 m-1 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
                   My Orders
                 </button>
-                <button className="bg-sky-950 m-1 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
+                <button onClick={openChangePwd} className="bg-sky-950 m-1 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
                   Change Password
                 </button>
               </div>

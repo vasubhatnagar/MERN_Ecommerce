@@ -9,7 +9,7 @@ const ProductCard = ({ product, Catalogue }) => {
     value: product.rating,
   };
   return (
-    <div className="bg-white productCard max-w-[200px] m-4 px-3 py-4 border-4 shadow-2xl border-cyan-950 rounded-md">
+    <div className="bg-white productCard max-w-[200px] m-4 px-3 py-4  shadow-2xl shadow-black rounded-md">
       <Link className="flex-col " to={`/product/${product._id}`}>
       
         <img

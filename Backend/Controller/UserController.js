@@ -69,9 +69,7 @@ exports.forgotPassword = CatchAsyncError(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const restLink = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  const restLink = `${req.protocol}://localhost:3000/password/reset/${resetToken}`;
 
   const message = `Hey ${user.name}, \n \n Please click on the provided link to reset your password. If this link is not requested by you, Kindly ignore it. \n\n ${restLink} \n \n Regards, \n Team Vasu Bhatnagar.`;
 

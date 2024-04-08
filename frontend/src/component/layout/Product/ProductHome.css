@@ -1,6 +1,5 @@
 .banner-image{
-    background-image: url("https://t4.ftcdn.net/jpg/02/79/74/91/360_F_279749144_wQUWtNbxuaq9Ojm51vs1APn3PAsdFGO1.jpg");
-    background-color: rgb(53, 151, 243);
+    background-color: rgb(206, 210, 214);
 }
 
 .paginationBox {
@@ -45,7 +44,7 @@
   }
   
   .pageItemActive {
-    background-color: darkblue;
+    background-color: rgb(0, 0, 0);
   }
   
   .pageLinkActive {

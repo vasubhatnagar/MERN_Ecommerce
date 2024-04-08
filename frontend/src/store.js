@@ -9,7 +9,7 @@ import {
   productDetailsReducer,
   productReducer,
 } from "./reducers/productReducer";
-import { profileReducer, userReducer } from "./reducers/userReducer";
+import { profileReducer, userReducer, forgotPasswordReducer } from "./reducers/userReducer";
 import { popupReducer } from "./reducers/popupReducer";
 
 const reducer = combineReducers({
@@ -17,7 +17,8 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   user: userReducer,
   popup: popupReducer,
-  profile:profileReducer
+  profile:profileReducer,
+  forgotPassword:forgotPasswordReducer
 });
 const intialState = {};
 const middleWare = [thunk];

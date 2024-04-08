@@ -39,19 +39,19 @@ const Products = () => {
     <div className="banner-image">
         <div className="flex justify-center px-5 py-10 ">
           <input
-            className="w-[60%] rounded-3xl pl-3"
+            className="w-[60%] rounded-3xl pl-3 shadow-2xl shadow-black"
             onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
             placeholder="Search Product Here"
           />
           <button
-            className=" px-5 py-2 mx-3 rounded-lg bg-cyan-950 text-white border-2 border-white font-mono font-bold"
+            className=" px-5 py-2 mx-3 rounded-lg bg-black text-white shadow-2xl shadow-black font-mono font-bold"
             onClick={handleSearchClick}
           >
             Search
           </button>
           <button
-            className=" px-5 py-2 mx-3 rounded-lg bg-white border-2 border-cyan-950 text-cyan-950 font-mono font-bold"
+            className=" px-5 py-2 mx-3 rounded-lg bg-black shadow-2xl shadow-black  text-white font-mono font-bold"
             onClick={handleClearClick}
           >
             Clear
@@ -67,7 +67,7 @@ const Products = () => {
               />
             ))}
         </div>
-        {ResultPerPage < productCount && <div className="paginationBox">
+        {ResultPerPage < productCount && <div className="paginationBox ">
               <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={ResultPerPage}
