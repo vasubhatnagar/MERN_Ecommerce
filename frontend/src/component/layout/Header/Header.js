@@ -4,9 +4,7 @@ import WebFont from "webfontloader";
 import {
   MdHome,
   MdShoppingCart,
-  MdOutlineEmail,
   MdLogin,
-  MdPhoneCallback,
   MdAccountCircle,
 } from "react-icons/md";
 import {
@@ -22,6 +20,7 @@ import { logout } from "../../../actions/userActions";
 
 const Header = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { cartItems} = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
     WebFont.load({
@@ -32,13 +31,11 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    console.log("Hi");
     dispatch(logout());
   };
 
   return (
     <div className=" sm:flex text-center justify-between bg-black py-3 px-5 font-mono">
-      
       <div className="justify-center text-white font-bold p-0 flex items-center ">
         <div className="px-3 mongo">
           <div>
@@ -83,8 +80,9 @@ const Header = () => {
             <h3 className="text-white twc">
               <MdShoppingCart />
             </h3>
+
+            <h4 className="text-white font-extrabold">Cart{cartItems.length >0 ? "("+cartItems.length+")":""}</h4>
           </Link>
-          <h4 className="text-white font-extrabold">Cart</h4>
         </div>
         <div className="flex-col  items-center px-0 sm:px-5">
           <Link to={"/account"}>

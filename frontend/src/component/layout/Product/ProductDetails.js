@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./ProductDetails.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,14 +10,31 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import ProductDetailsShimmer from "../shimmer/productDetailsShimmer";
+import { addToCart } from "../../../actions/cartActions";
 const ProductDetails = () => {
   const { id } = useParams();
   const alert = useAlert();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-  console.log(product);
+  const[quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const IncQuantity = ()=>{
+    if(quantity < product.stock){
+      const qty = quantity+1;
+      setQuantity(qty);
+    }
+  }
+  const AddToCartHandler = ()=>{
+    dispatch(addToCart(id, quantity));
+  }
+
+  const DecQuantity = ()=>{
+    if(quantity > 1){
+      const qty = quantity-1;
+      setQuantity(qty);
+    }
+  }
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -74,18 +91,24 @@ const ProductDetails = () => {
           </div>{" "}
           <div className="flex mt-5">
             <div className="flex ">
-              <button className="bg-sky-950 px-2 py-1 rounded-s-full">
+              <button
+                onClick={DecQuantity}
+                className="bg-sky-950 px-2 py-1 rounded-s-full"
+              >
                 <p className="text-white font-extrabold text-2xl">-</p>
               </button>
               <input
                 className="bg-cyan-300 w-[70px] text-center font-bold text-cyan-950"
-                value={1}
+                value={quantity}
               />
-              <button className="bg-sky-950 px-2 py-1 rounded-e-full">
+              <button
+                onClick={IncQuantity}
+                className="bg-sky-950 px-2 py-1 rounded-e-full"
+              >
                 <p className="text-white font-extrabold text-2xl">+</p>
               </button>
             </div>
-            <button className="bg-sky-950 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
+            <button onClick={AddToCartHandler} className="bg-sky-950 text-white font-semibold px-3 py-2 rounded-2xl ml-5">
               Add To Cart
             </button>
           </div>

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { loadUser } from "./actions/userActions.js";
 import Account from "./component/layout/User/Account.js";
 import ResetPassword from "./component/layout/User/ResetPassword.js";
+import Cart from "./component/layout/Checkout/Cart.js";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/login" Component={LoginSignup} />
         <Route exact path="/account" Component={Account} />
         <Route exact path="/password/reset/:resetToken" Component={ResetPassword} />
+        <Route exact path="/cart" Component={Cart} />
       </Routes>
       <Footer />
     </Router>
